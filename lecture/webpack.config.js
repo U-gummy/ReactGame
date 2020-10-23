@@ -1,3 +1,4 @@
+// webpack 은 node가 돌려 주므로  import로 불가능 반드시 const!!
 const path = require('path') // node에서 경로 쉽게 조작 하게 
 const webpack = require('webpack') 
 
@@ -25,14 +26,18 @@ module.exports = {
                 }], 
                 '@babel/preset-react'
             ],
-            plugins : ['@babel/plugin-proposal-class-properties'],
+            plugins : [
+                '@babel/plugin-proposal-class-properties',
+                // 'react-hot-loader/babel'
+            ],
             }
         }],
     },
     plugins : [new webpack.LoaderOptionsPlugin({debug:true})],
     output : {
         path : path.join(__dirname, 'dist'),
-        filename: 'app.js'
+        filename: 'app.js',
+        // pulicPath:'/dist/'
     } //출력
 
 }
