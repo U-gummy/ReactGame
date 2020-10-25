@@ -5,6 +5,7 @@
 // ES2015 모듈 문법 // 노드는 이 문법을 지원 하지 않는다 . 바벨이 import를 require로 바꿔주므로 사용 가능
 import React from 'react' 
 import ReactDom from 'react-dom'
+import GuGuDan from './GuGuDan/GuGuDan'
 import WordRelay from './WordRelay/WordRelay'
 import NumberBaseball from './NumberBaseball/NumberBaseball'
 const { hot } = require('react-hot-loader/root');
@@ -12,4 +13,4 @@ const { hot } = require('react-hot-loader/root');
 const HotWordRelay = hot(WordRelay);
 const HotNumberBaseball = hot(NumberBaseball);
 
-ReactDom.render(<div><HotWordRelay /><HotNumberBaseball /></div>, document.querySelector('#root'))
+ReactDom.render(<div><GuGuDan/><HotWordRelay /><HotNumberBaseball /></div>, document.querySelector('#root'))
