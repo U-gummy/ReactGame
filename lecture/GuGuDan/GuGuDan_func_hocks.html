@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> <!-- 리엑트 코드를 웹에 붙여주는 역할 -->
+    <script crossorigin src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> <!--  JSX(JS + XML) 문법을 JS(ES5, ES6 등) 문법으로 바꿔줌 -->
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        
+        // 함수로 만들면 setState 할때마다 함수가 다시 실행 class 보다 좀 더 느릴 수 있다.
+        const GuGuDan = () => {
+            const [First, setFirst] = React.useState(Math.ceil(Math.random() * 9))
+            const [Second, setSecond] = React.useState(Math.ceil(Math.random() * 9))
+            const [Value, setValue] = React.useState('');
+            const [Result, setResult] = React.useState('');
+            const inputRef = React.useRef();  // 돔에 접근
+            
+            const onSubmitForm = (e) => { 
+                e.preventDefault();
+                if(parseInt(Value) === First * Second) {
+                    setFirst(Math.ceil(Math.random() * 9))
+                    setSecond(Math.ceil(Math.random() * 9))
+                    setValue('')
+                    setResult('정답:'+ Value)
+                    inputRef.current.focus();
+                } else {
+                    setValue('');
+                    setResult('땡떙떙')
+                    inputRef.current.focus();
+                }
+            }
+
+            const onChangeInput = (e) => {
+                setValue(e.target.value)
+            }
+
+            return (
+                <div>
+                    <React.Fragment> 
+                        <div>{First} 곱하기 {Second} 는 ?</div>
+                        <form onSubmit={onSubmitForm}>
+                            <input 
+                                type="number" 
+                                value={Value} 
+                                onChange={onChangeInput}
+                                ref={inputRef}
+                            />
+                            <button>입력</button>
+                        </form>
+                        <div>{Result}</div>
+                    </React.Fragment>
+                </div>
+            )
+        }
+   
+    </script>
+    <script type="text/babel">
+        ReactDOM.render(<GuGuDan />, document.querySelector("#root"))
+    </script>
+</body>
+</html>
