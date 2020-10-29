@@ -11,7 +11,7 @@ class GuGuDan extends Component {
             result: '',
         }
     // }
-    // }
+    // } 
     onSubmit = (e) => { // 메소드의 경우 function으로 쓰면 this가 달라진다. 그래서 ()=> 로 !! 
         e.preventDefault();
         if(parseInt(this.state.value) === this.state.first * this.state.second) {
