@@ -10,9 +10,10 @@ import WordRelay from './WordRelay/WordRelay'
 import NumberBaseball from './NumberBaseball/NumberBaseball'
 import ResponseCheck from './ResponseCheck/ResponseCheck'
 import RSP from './RSP/RSP'
+import Lotto from './Lotto/Lotto'
 const { hot } = require('react-hot-loader/root');
 
-const HotRSP = hot(RSP);
+const HotLotto = hot(Lotto);
 
 ReactDom.render(
     <div>
@@ -20,6 +21,7 @@ ReactDom.render(
         <WordRelay /><hr/>
         <NumberBaseball /><hr/>
         <ResponseCheck /><hr/>
-        <HotRSP /><hr/>
+        <RSP /><hr/>
+        <HotLotto /><hr/>
     </div>
 ,document.querySelector('#root'))

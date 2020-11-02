@@ -1,11 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react'
 
-// class 의 경우 
-// -> constructor -> render -> ref -> componentDidMount 
-// -> (setState/props 바뀔때마다) -> shouldComponentUpdate(true) -> render -> componentDidUpdate 
-// -> 부모가 나를 없앳을 때 -> componentWillUnmount -> 소멸
-
 const repCoords = {
     r : '-166px',
     s : '5px',
