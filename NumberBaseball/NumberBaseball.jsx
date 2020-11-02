@@ -9,7 +9,6 @@ function getNumbers () {
         const chosen = candidate.splice(Math.floor(Math.random() * (9 - i)) , 1)[0];
         array.push(chosen);
     }
-    console.log(array,"array")
     return array;
 }
 
@@ -21,7 +20,6 @@ const NumberBaseball = memo(() => {
 
     
     const onSubmitFrom = (e) => {
-        console.log(getNumbers(),"array")
         e.preventDefault();
         if(Value === Answer.join('')){ // 정답 일 경우 
             setResult('홈런');

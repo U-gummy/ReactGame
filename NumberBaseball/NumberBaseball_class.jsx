@@ -9,7 +9,6 @@ function getNumbers () {
         const chosen = candidate.splice(Math.floor(Math.random() * (9 - i)) , 1)[0];
         array.push(chosen);
     }
-    console.log(array,"array")
     return array;
 }
 class NumberBaseball extends PureComponent {

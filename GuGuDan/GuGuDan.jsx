@@ -41,7 +41,6 @@ class GuGuDan extends Component {
 
     render() {
         // setState 할때마다 render() 함수가 실행됩니다.
-        console.log("렌더링"); 
         return (
             // <React.Fragment> = <></> , <></> 은 현재 바벨 버전에서 지원을 하지않아 <React.Fragment>로 작업
             <React.Fragment> 

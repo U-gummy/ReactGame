@@ -8,9 +8,18 @@ import ReactDom from 'react-dom'
 import GuGuDan from './GuGuDan/GuGuDan'
 import WordRelay from './WordRelay/WordRelay'
 import NumberBaseball from './NumberBaseball/NumberBaseball'
+import ResponseCheck from './ResponseCheck/ResponseCheck'
+import RSP from './RSP/RSP'
 const { hot } = require('react-hot-loader/root');
 
-const HotWordRelay = hot(WordRelay);
-const HotNumberBaseball = hot(NumberBaseball);
+const HotRSP = hot(RSP);
 
-ReactDom.render(<div><GuGuDan/><HotWordRelay /><HotNumberBaseball /></div>, document.querySelector('#root'))
+ReactDom.render(
+    <div>
+        <GuGuDan/><hr/>
+        <WordRelay /><hr/>
+        <NumberBaseball /><hr/>
+        <ResponseCheck /><hr/>
+        <HotRSP /><hr/>
+    </div>
+,document.querySelector('#root'))
