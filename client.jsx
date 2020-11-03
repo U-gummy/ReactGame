@@ -12,13 +12,15 @@ import ResponseCheck from './ResponseCheck/ResponseCheck'
 import RSP from './RSP/RSP'
 import Lotto from './Lotto/Lotto'
 import TicTacToe from './TicTacToe/TicTacToe'
+import MineSearch from './MineSearch/MineSearch'
 const { hot } = require('react-hot-loader/root');
 
-const HotTicTacToe = hot(TicTacToe);
+const HotMineSearch = hot(MineSearch);
 
 ReactDom.render(
     <div>
-        <HotTicTacToe /><hr/>
+        <HotMineSearch /><hr/>
+        <TicTacToe /><hr/>
         <Lotto /><hr/>
         <RSP /><hr/>
         <ResponseCheck /><hr/>
