@@ -11,17 +11,19 @@ import NumberBaseball from './NumberBaseball/NumberBaseball'
 import ResponseCheck from './ResponseCheck/ResponseCheck'
 import RSP from './RSP/RSP'
 import Lotto from './Lotto/Lotto'
+import TicTacToe from './TicTacToe/TicTacToe'
 const { hot } = require('react-hot-loader/root');
 
-const HotLotto = hot(Lotto);
+const HotTicTacToe = hot(TicTacToe);
 
 ReactDom.render(
     <div>
-        <GuGuDan/><hr/>
-        <WordRelay /><hr/>
-        <NumberBaseball /><hr/>
-        <ResponseCheck /><hr/>
+        <HotTicTacToe /><hr/>
+        <Lotto /><hr/>
         <RSP /><hr/>
-        <HotLotto /><hr/>
+        <ResponseCheck /><hr/>
+        <NumberBaseball /><hr/>
+        <WordRelay /><hr/>
+        <GuGuDan/><hr/>
     </div>
 ,document.querySelector('#root'))

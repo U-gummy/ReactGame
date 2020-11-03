@@ -13,7 +13,7 @@ function getWinNumbers () {
     return [...winNumders, bonusNumber]
 }
 
-function Loto() {
+function Lotto() {
     // useRef 일반 값을 기억
     // useMemo 복잡한 함수 결과값(return 값)을 기억
     // useMemo 함수를 다시실행하지 않고 기억할수 있게 , 두번째 인자가 바뀌지 않는한 다시 실행되지 않는다. 
@@ -28,7 +28,6 @@ function Loto() {
     const [Bonus, setBonus] = useState(null);
     const [Redo, setRedo] = useState(false);
     const timeouts = useRef([]);
-    
 
     useEffect(() => {
         for (let i = 0; i < WinNumbers.length - 1; i++) {
@@ -47,8 +46,6 @@ function Loto() {
         }
     }, [timeouts.current])
     
-
-
     //componentDidMount 만 
     // useEffect(() => {
     //     //ajax
@@ -64,9 +61,6 @@ function Loto() {
     //     }
     // }, [바뀌는값]) 
 
-
-
-
     // useCallback 2번째 인자 WinNumbers가 바뀌기 전까지 함수를 기억 한다.
     const onClickRedo = useCallback(() => { 
         setWinNumbers(getWinNumbers());
@@ -77,18 +71,18 @@ function Loto() {
     },[WinNumbers]);
     return (
         <>
-                <div>당첨숫자</div>   
-                <div id="result">
-                    {WinBalls.map((v)=> <Ball key={v} number={v} /> )}
-                </div>
-                <div>보너스!</div>
-                {/* onClick useCallback예시, 자식 컴포넌트에 넘겨 줄때는 useCallback 해주어야 한다 */}
-                {/* 그렇지 않으면 부모 스테이트만 바뀌어도 자식이 계속 랜더링 된다. */}
-                {Bonus && <Ball number={Bonus}  onClick={onClickRedo}/>} 
-                {Redo && <button onClick={onClickRedo}>한 번 더!!</button>}
-                
-            </>
+            <div>당첨숫자</div>   
+            <div id="result">
+                {WinBalls.map((v)=> <Ball key={v} number={v} /> )}
+            </div>
+            <div>보너스!</div>
+            {/* onClick useCallback예시, 자식 컴포넌트에 넘겨 줄때는 useCallback 해주어야 한다 */}
+            {/* 그렇지 않으면 부모 스테이트만 바뀌어도 자식이 계속 랜더링 된다. */}
+            {Bonus && <Ball number={Bonus}  onClick={onClickRedo}/>} 
+            {Redo && <button onClick={onClickRedo}>한 번 더!!</button>}
+            
+        </>
     )
 }
 
-export default Loto
+export default Lotto

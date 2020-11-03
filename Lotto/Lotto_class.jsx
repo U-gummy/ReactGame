@@ -13,7 +13,7 @@ function getWinNumbers () {
     return [...winNumders, bonusNumber]
 }
 
-export class Loto extends Component {
+export class Lotto extends Component {
     state = {
         winNumbers : getWinNumbers(), // 당첨 숫자
         winBalls : [],
@@ -84,4 +84,4 @@ export class Loto extends Component {
     }
 }
 
-export default Loto
+export default Lotto
