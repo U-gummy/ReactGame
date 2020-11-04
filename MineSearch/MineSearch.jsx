@@ -1,4 +1,4 @@
-import React, { useReducer, createContext, useMemo } from 'react'
+import React, { useReducer, createContext, useMemo, useEffect } from 'react'
 import Table from './Component/Table'
 import Form from './Component/Form'
 
@@ -19,9 +19,15 @@ export const TableContext = createContext({
 
 const initialState = {
     tableData : [],
+    data : {
+        row : 0, 
+        cell : 0, 
+        mine : 0,
+    },
     timer : 0,
     result : '',
     halted : false,
+    openedCount : 0,
 }
 
 const planMine = (row, cell, mine) => {
@@ -57,14 +63,22 @@ export const CLICK_MINE = 'CLICK_MINE';
 export const FLAG_CELL = 'FLAG_CELL';
 export const QUESTION_CELL = 'QUESTION_CELL';
 export const NORMALIZE_CELL = 'NORMALIZE_CELL';
+export const INCREMENT_TIMER = 'INCREMENT_TIMER';
 
 const reducer = (state, action) => {
     switch (action.type) {
         case START_GAME: {
             return {
                 ...state,
+                data : {
+                    row : action.row, 
+                    cell : action.cell, 
+                    mine : action.mine,
+                },
+                openedCount : 0,
                 tableData: planMine(action.row, action.cell, action.mine),
-                halted : false
+                halted : false,
+                timer : 0,
             }
         }
         case OPEN_CELL: {
@@ -73,13 +87,17 @@ const reducer = (state, action) => {
                 tableData[i] = [...state.tableData[i]];
             });
             const checked = [];
+            let openedCount = 0;
             const checkAround = (row, cell) => {
+                // 상하좌우 없는칸은 열지 않기
+                if(row < 0 || row >= tableData.length || cell < 0 || cell > tableData[0].length) { 
+                    return;
+                }
+                //닫힌 칸만 열기
                 if([CODE.OPENED, CODE.FLAG_MINE, CODE.FLAG, CODE.QUESTION_MINE, CODE.QUESTION].includes(tableData[row][cell])) {
                     return;
                 }
-                if(row < 0 || row >= tableData.length || cell < 0 || cell > tableData[0].length) { //상하 좌우 칸이 아닌 경우 필터링
-                    return;
-                }
+                // 한번 연칸은 무시하기
                 if(checked.includes(row + ',' + cell)) { // 이미 검사한 칸이면
                     return;
                 } else {
@@ -125,14 +143,26 @@ const reducer = (state, action) => {
                             checkAround(n[0], n[1])
                         }
                     });
-                } else {
-    
+                }
+                if(tableData[row][cell] === CODE.NORMAL) {  
+                    openedCount += 1;
                 }
             };
-            checkAround(action.row, action.cell)
+            checkAround(action.row, action.cell);
+            let halted = false;
+            let result = '';
+            console.log(state.data.row * state.data.cell - state.data.mine , state.openedCount , openedCount);
+            if(state.data.row * state.data.cell - state.data.mine === state.openedCount + openedCount) { //승리
+                halted = true;
+                result = `${state.timer}초만에 승리하셨습니다`
+            }
+            
             return {
                 ...state,
                 tableData,
+                openedCount : state.openedCount + openedCount,
+                halted,
+                result,
             }
         }
         case CLICK_MINE: {
@@ -185,6 +215,12 @@ const reducer = (state, action) => {
                 tableData,
             }
         }
+        case INCREMENT_TIMER : {
+            return {
+                ...state,
+                timer : state.timer + 1,
+            }
+        }
         default:
             return state;
     }
@@ -194,7 +230,18 @@ const reducer = (state, action) => {
 function MineSearch() {
     const [state, dispatch] = useReducer(reducer, initialState);
     const { tableData, halted, timer, result } = state;
-    const value = useMemo(()=>({ tableData: tableData, halted: halted, dispatch }), [tableData, halted]);
+    const value = useMemo(()=>({ tableData, halted, dispatch }), [tableData, halted]);
+    useEffect(() => {
+        let timer;
+        if(halted === false) {
+            timer = setInterval(() => {
+                dispatch({ type: INCREMENT_TIMER })
+            }, 1000);
+        }
+        return () => {
+            clearInterval(timer);
+        }
+    }, [halted])
     return (
         <TableContext.Provider value={value}>
             <Form />

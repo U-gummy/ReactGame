@@ -1,7 +1,7 @@
-import React, { useState, useCallback, useContext } from 'react'
+import React, { useState, useCallback, useContext, memo } from 'react'
 import { START_GAME, TableContext } from '../MineSearch';
 
-function Form() {
+const Form = memo(() => {
     const [row, setRow] = useState(10);
     const [cell, setCell] = useState(10);
     const [mine, setMine] = useState(20);
@@ -22,7 +22,6 @@ function Form() {
     const onClickBtn = useCallback(() => {
         dispatch({type : START_GAME, row, cell, mine})
     },[row, cell, mine]);
-
     return (
         <div>
             <input type="text" placeholder='가로' value={row} onChange={onChangeRow}/>   
@@ -31,6 +30,6 @@ function Form() {
             <button onClick={onClickBtn}>시작</button> 
         </div>
     )
-}
+});
 
 export default Form
