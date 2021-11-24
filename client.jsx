@@ -19,13 +19,21 @@ const HotMineSearch = hot(MineSearch);
 
 ReactDom.render(
     <div>
+        <h1>GAMES</h1><hr/>
+        <h3>지뢰찾기</h3>
         <HotMineSearch /><hr/>
+        <h3>틱택토</h3>
         <TicTacToe /><hr/>
+        <h3>로또</h3>
         <Lotto /><hr/>
+        <h3>가위바위보</h3>
         <RSP /><hr/>
         <ResponseCheck /><hr/>
+        <h3>숫자야구</h3>
         <NumberBaseball /><hr/>
+        <h3>끝말잇기</h3>
         <WordRelay /><hr/>
+        <h3>구구단</h3>
         <GuGuDan/><hr/>
     </div>
 ,document.querySelector('#root'))
